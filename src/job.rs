@@ -1,11 +1,11 @@
-use crate::command::Command;
+use crate::job_command::JobCommand;
 use crate::thread_pool::Runnable;
 use std::fmt::Debug;
 
 pub struct Job {
     pub runnable: Runnable,
     pub id: String,
-    pub command: Command,
+    pub command: JobCommand,
 }
 
 impl Debug for Job {
@@ -19,7 +19,7 @@ impl Debug for Job {
 }
 
 impl Job {
-    pub fn new(runnable: Runnable, id: String, command: Command) -> Job {
+    pub fn new(runnable: Runnable, id: String, command: JobCommand) -> Job {
         Job {
             runnable,
             id,

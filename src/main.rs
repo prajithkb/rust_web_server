@@ -1,8 +1,8 @@
 use std::net::TcpListener;
-use web_server::{command::Command, job::Job, thread_pool::ThreadPool, connection_handler::handle_connection};
+use web_server::{job_command::JobCommand, job::Job, thread_pool::ThreadPool, connection_handler::handle_connection};
 fn main() {
     let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
-    let pool = ThreadPool::new(2);
+    let mut pool = ThreadPool::new(2);
     let mut counter = 0;
 
     for stream in listener.incoming() {
@@ -19,7 +19,7 @@ fn main() {
                 handle_connection(stream, id);
             }),
             counter.to_string(),
-            Command::RUNNABLE,
+            JobCommand::RUN,
         ));
     }
 }

@@ -1,4 +1,4 @@
-use crate::{command::Command, job::Job};
+use crate::{job_command::JobCommand, job::Job};
 use mpsc::Receiver;
 use std::fmt::Debug;
 use std::{
@@ -22,12 +22,12 @@ impl Worker {
             let job = receiver_inside.lock().unwrap().recv().unwrap();
             println!("Thread-{}, received Job {} {:?}", id, job.id, job.command);
             match job.command {
-                Command::RUNNABLE => {
+                JobCommand::RUN => {
                     (job.runnable)();
-                    println!("Thread-{}, finished RUNNABLE Job {}", id, job.id);
+                    println!("Thread-{}, finished (RUN) Job {}", id, job.id);
                 }
-                Command::INTERRUPT => {
-                    break println!("Thread-{}, finished INTERRUPT Job {}", id, job.id);
+                JobCommand::STOP => {
+                    break println!("Thread-{}, finished (STOP) Job {}", id, job.id);
                 }
             }
         });

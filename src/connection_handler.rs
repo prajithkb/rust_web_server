@@ -1,7 +1,6 @@
 use std::borrow::Cow;
 use std::io::prelude::*;
 use std::net::TcpStream;
-use std::process::Command;
 
 pub fn handle_connection(mut stream: TcpStream, id: i32) {
     let result = read_and_write(&mut stream, id);

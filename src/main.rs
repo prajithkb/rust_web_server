@@ -35,7 +35,7 @@ fn handle_connection(stream: TcpStream, pool: &mut ThreadPool, counter: &mut i32
     ));
     if result.is_err() {
         cloned_stream.map(|mut s| {
-            respond_with(&mut s, format!("Error: {:?}", result.err())).unwrap_or_default();
+            respond_with(&mut s, format!("Error: {:?}", result.unwrap_err())).unwrap_or_default();
         }).unwrap_or_default();
     }
 }

@@ -4,6 +4,11 @@ version = "0.1.0"
 authors = ["Prajith <kprajith@amazon.com>"]
 edition = "2018"
 
+[profile.dev]
+panic = "unwind"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+
+thread_pool = {path = "../thread_pool"}
